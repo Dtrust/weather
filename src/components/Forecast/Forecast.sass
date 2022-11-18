@@ -1,0 +1,27 @@
+@import './src/sass/variables'
+@import './src/sass/mixins'
+@import './src/sass/functions'
+
+
+.forecast
+	margin-bottom: toRem(30)
+	&-content
+		box-shadow: $-box-shadow
+	&-wrap
+		@include flexCenter
+	&-list
+		display: flex
+		column-gap: toRem(20)
+		margin-top: toRem(30)
+		padding-bottom: toRem(15)
+		overflow-x: auto
+		scroll-snap-type: x proximity
+		@include scrollBar
+	&-btn
+		&:not(:last-of-type)
+			margin-right: toRem(15)
+		&.active
+			background: green
+			&:hover
+				background: green
+				opacity: .8

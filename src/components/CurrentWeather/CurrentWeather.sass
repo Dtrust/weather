@@ -1,0 +1,76 @@
+@import './src/sass/variables'
+@import './src/sass/mixins'
+@import './src/sass/functions'
+
+
+.current
+	&-content
+		box-shadow: $-box-shadow
+		overflow: hidden
+	&-weather
+		display: flex
+		column-gap: toRem(30)
+		&__city
+			margin-bottom: toRem(20)
+			font-size: toRem(20)
+			font-weight: 700
+		&__wrap
+			width: 50%
+			display: flex
+			flex-direction: column
+		&__temp
+			@include flexCenter
+			font-size: toRem(80)
+		&__icon
+			max-width: toRem(150)
+		&__txt
+			@include text
+			text-align: center
+		&__feel
+			margin-bottom: toRem(30)
+			& span
+				@include text
+				&:not(:last-of-type)
+					margin-right: toRem(5)
+
+.option
+	@include flexCenter
+	&:not(:last-of-type)
+		margin-bottom: toRem(10)
+	&-icon
+		margin-right: toRem(10)
+		fill: var(--color)
+	&-txt
+		@include text
+		& .txt
+			display: inline-block
+			min-width: toRem(120)
+
+@media screen and (max-width: 575px)
+	.current
+		&-weather
+			flex-direction: column
+			&__wrap
+				width: 100%
+				&:nth-of-type(1)
+					align-items: center
+					flex-direction: initial
+			&__txt
+				margin-left: toRem(30)
+
+@media screen and (max-width: 420px)
+	.current
+		&-weather
+			&__temp
+				font-size: 10vw
+			&__feel
+				margin-bottom: toRem(10)
+				& span
+					font-size: 5vw
+			&__wrap
+				&:nth-of-type(2)
+					margin-top: toRem(10)
+			&__option
+				& .option
+					&-txt
+						font-size: 4vw

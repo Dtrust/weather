@@ -1,0 +1,13 @@
+@use 'sass:math';
+
+@function toRem($value) {
+    @return math.div($value, 16) + rem;
+}
+
+@function toPrc($pxOne, $pxTwo) {
+    @return math.div($pxOne, $pxTwo) * 100%;
+}
+
+@function toEm($px) {
+    @return math.div($px, 16) + em;
+}

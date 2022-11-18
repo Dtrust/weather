@@ -1,0 +1,24 @@
+@import './src/sass/mixins'
+@import './src/sass/functions'
+
+.search
+	&-content
+		@include flexCenter
+		justify-content: center
+		position: relative
+		&.container
+			max-width: toRem(340)
+	&-input
+		width: 100%
+		padding: toRem(10) toRem(35) toRem(10) toRem(10)
+		height: toRem(40)
+		border-radius: toRem(10)
+	&-icon
+		position: absolute
+		top: 50%
+		right: toRem(25)
+		transform: translate(0, -50%)
+		width: toRem(17)
+		height: toRem(17)
+		opacity: .5
+		cursor: pointer
