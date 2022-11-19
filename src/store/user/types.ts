@@ -1,4 +1,4 @@
-import { StatusEnum } from '../weather/types';
+import { StatusEnum } from '../types';
 
 export interface IUser {
     ip?: string;

@@ -1,13 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { IUser } from '../user/types';
-import { weatherAPI } from '../../api/weatherApi';
+import { forecastAPI } from '../../api/weatherApi';
 
-export const fetchWeather = createAsyncThunk(
-    'weather/fetchCurrentWeather',
+export const fetchForecastWeather = createAsyncThunk(
+    'forecast/fetchForecast',
     async (_, { getState }) => {
         const { user } = (await getState()) as { user: IUser };
 
-        const { data } = await weatherAPI(user);
+        const { data } = await forecastAPI(user);
 
         return data;
     }

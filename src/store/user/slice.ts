@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IUser } from './types';
-import { fetchUserLocation } from '../user/actions';
-import { StatusEnum } from '../weather/types';
+import { fetchUserLocation } from './actions';
+import { StatusEnum } from '../types';
 
 const initialState: IUser = {
     ip: '',
@@ -19,8 +19,14 @@ export const userLocationSlice = createSlice({
             state.forecastDays = action.payload;
         },
         setUserCity(state, action: PayloadAction<string>) {
-            state.city = action.payload;
+            state.city =
+                action.payload.charAt(0).toUpperCase() +
+                action.payload.slice(1);
             state.userStatus = StatusEnum.SUCCESS;
+
+            if (!action.payload) {
+                state.userStatus = StatusEnum.ERROR;
+            }
         },
     },
     extraReducers: builder => {

@@ -2,12 +2,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { useAPPDispatch } from '../../store/store';
-import { fetchWeather } from '../../store/weather/actions';
+import { fetchCurrentWeather } from '../../store/currentWeather/actions';
 import { fetchUserLocation } from '../../store/user/actions';
-import { selectUser } from '../../store/user/selectors';
+import { selectUserCity, selectUserStatus } from '../../store/user/selectors';
 import { IUser } from '../../store/user/types';
-import { selectWeather } from '../../store/weather/selectors';
-import { StatusEnum } from '../../store/weather/types';
+import { StatusEnum } from '../../store/types';
+import { selectCurrentWeather } from '../../store/currentWeather/selectors';
 
 import { ErrorBlock } from '../ErrorBlock';
 import { SkeletonCurrentWeather } from './SkeletonCurrentWeather';
@@ -15,11 +15,13 @@ import { SkeletonCurrentWeather } from './SkeletonCurrentWeather';
 import './CurrentWeather.sass';
 import icons from '../../assets/images/icons.svg';
 
-export const CurrentWeather: React.FC = React.memo(() => {
+export const CurrentWeather: React.FC = () => {
     const dispatch = useAPPDispatch();
 
-    const { current, weatherStatus } = useSelector(selectWeather);
-    const { city, userStatus } = useSelector(selectUser) as IUser;
+    const { current, currentWeatherStatus } = useSelector(selectCurrentWeather);
+
+    const city: string = useSelector(selectUserCity) || '';
+    const userStatus = useSelector(selectUserStatus) as IUser;
 
     React.useEffect(() => {
         dispatch(fetchUserLocation());
@@ -27,7 +29,7 @@ export const CurrentWeather: React.FC = React.memo(() => {
 
     React.useEffect(() => {
         if (city) {
-            dispatch(fetchWeather());
+            dispatch(fetchCurrentWeather());
         }
     }, [dispatch, city]);
 
@@ -35,11 +37,12 @@ export const CurrentWeather: React.FC = React.memo(() => {
         <section className="block current">
             <div className="container current-content">
                 {userStatus === StatusEnum.ERROR ||
-                weatherStatus === StatusEnum.ERROR ? (
+                currentWeatherStatus === StatusEnum.ERROR ? (
                     <ErrorBlock message="Sorry Your location was not found. Please use the search field and enter your city" />
                 ) : (
                     <>
-                        {weatherStatus === StatusEnum.LOADING ? (
+                        {userStatus === StatusEnum.LOADING ||
+                        currentWeatherStatus === StatusEnum.LOADING ? (
                             <SkeletonCurrentWeather />
                         ) : (
                             <>
@@ -153,4 +156,4 @@ export const CurrentWeather: React.FC = React.memo(() => {
             </div>
         </section>
     );
-});
+};

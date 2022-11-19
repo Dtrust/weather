@@ -22,7 +22,7 @@ export const Search: React.FC = () => {
         debounce((str: string) => {
             dispatch(setUserCity(str));
         }, 1000),
-        []
+        [dispatch]
     );
 
     const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { getUserIP, getUserLocation } from '../../api/userApi';
+import { IUser } from './types';
 
 export const fetchUserIP = createAsyncThunk('users/fetchUserIP', async () => {
     const data = await getUserIP();
@@ -11,13 +12,14 @@ export const fetchUserIP = createAsyncThunk('users/fetchUserIP', async () => {
 export const fetchUserLocation = createAsyncThunk(
     'users/fetchUserLocation',
     async (_, { dispatch }) => {
-        const ip = await dispatch(fetchUserIP()).then((res: any) => {
+        const ip = (await dispatch(fetchUserIP()).then(res => {
             try {
-                return res.payload.ip;
+                const { ip } = res.payload as IUser;
+                return ip;
             } catch (e) {
                 return e;
             }
-        });
+        })) as string;
 
         const data = await getUserLocation(ip);
         const country_code = data ? data.country_code : '';

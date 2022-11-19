@@ -3,11 +3,16 @@ import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
 import { useAPPDispatch } from '../../store/store';
-import { selectWeather } from '../../store/weather/selectors';
-import { ForecastItemType, StatusEnum } from '../../store/weather/types';
+import { selectForecast } from '../../store/forecastWeather/selectors';
+import { ForecastItemType } from '../../store/forecastWeather/types';
+import { StatusEnum } from '../../store/types';
 import { setForecastDays } from '../../store/user/slice';
-import { selectUser, selectUserForecast } from '../../store/user/selectors';
-import { fetchWeather } from '../../store/weather/actions';
+import {
+    selectUserCity,
+    selectUserForecast,
+    selectUserStatus,
+} from '../../store/user/selectors';
+import { fetchForecastWeather } from '../../store/forecastWeather/actions';
 
 import { ForecastItem } from '../ForecastItem';
 import { SkeletonForecastItem } from '../ForecastItem/SkeletonForecastItem';
@@ -23,10 +28,17 @@ const forecastBtns = [
 export const Forecast: React.FC = () => {
     const dispatch = useAPPDispatch();
 
-    const { userStatus } = useSelector(selectUser);
+    const city = useSelector(selectUserCity);
+    const userStatus = useSelector(selectUserStatus);
     const forecastDays = useSelector(selectUserForecast) || '';
 
-    const { forecast, weatherStatus } = useSelector(selectWeather);
+    const { forecastItems, forecastStatus } = useSelector(selectForecast);
+
+    React.useEffect(() => {
+        if (city) {
+            dispatch(fetchForecastWeather());
+        }
+    }, [dispatch, city]);
 
     const onChangeForecast = (
         event: React.MouseEvent<HTMLButtonElement>,
@@ -38,8 +50,8 @@ export const Forecast: React.FC = () => {
 
         forecastDays = dataDay as string;
 
-        if (forecast.length < +forecastDays) {
-            dispatch(fetchWeather());
+        if (forecastItems.length < +forecastDays) {
+            dispatch(fetchForecastWeather());
         }
     };
 
@@ -48,7 +60,7 @@ export const Forecast: React.FC = () => {
             <SkeletonForecastItem key={index} />
         ));
 
-    const forecastItems = forecast
+    const forecast = forecastItems
         .map((obj: ForecastItemType, index) => (
             <ForecastItem key={index} {...obj} />
         ))
@@ -73,16 +85,16 @@ export const Forecast: React.FC = () => {
     return (
         <section className="block forecast">
             {userStatus === StatusEnum.ERROR ||
-            weatherStatus === StatusEnum.ERROR ? (
+            forecastStatus === StatusEnum.ERROR ? (
                 <></>
             ) : (
                 <div className="container forecast-content">
                     <h2 className="block-title forecast-title">Forecast</h2>
                     <div className="forecast-wrap">{buttons}</div>
                     <div className="forecast-list">
-                        {weatherStatus === StatusEnum.LOADING
+                        {forecastStatus === StatusEnum.LOADING
                             ? skeleton(+forecastDays)
-                            : forecastItems}
+                            : forecast}
                     </div>
                 </div>
             )}
