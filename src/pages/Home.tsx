@@ -1,5 +1,11 @@
 import React from 'react';
-import { CurrentWeather, Forecast, Header, Search } from '../components';
+import {
+    CurrentWeather,
+    Footer,
+    Forecast,
+    Header,
+    Search,
+} from '../components';
 
 export const Home = () => {
     return (
@@ -8,6 +14,7 @@ export const Home = () => {
             <Search />
             <CurrentWeather />
             <Forecast />
+            <Footer />
         </>
     );
 };

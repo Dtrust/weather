@@ -9,11 +9,11 @@ import { IUser } from '../../store/user/types';
 import { StatusEnum } from '../../store/types';
 import { selectCurrentWeather } from '../../store/currentWeather/selectors';
 
+import CurrentOption from './CurrentOption';
 import { ErrorBlock } from '../ErrorBlock';
 import { SkeletonCurrentWeather } from './SkeletonCurrentWeather';
 
 import './CurrentWeather.sass';
-import icons from '../../assets/images/icons.svg';
 
 export const CurrentWeather: React.FC = () => {
     const dispatch = useAPPDispatch();
@@ -49,9 +49,7 @@ export const CurrentWeather: React.FC = () => {
                                 <h2 className="block-title current-title">
                                     Current Weather
                                 </h2>
-                                <h3 className="current-weather__city">
-                                    {city}
-                                </h3>
+                                <h3 className="current-city">{city}</h3>
                                 <div className="current-wrap">
                                     <div className="current-weather">
                                         <div className="current-weather__wrap">
@@ -80,72 +78,26 @@ export const CurrentWeather: React.FC = () => {
                                                     <sup>°</sup>C
                                                 </span>
                                             </p>
-                                            <div className="current-weather__option option">
-                                                <svg
-                                                    className="option-icon"
-                                                    width="20"
-                                                    height="20"
-                                                >
-                                                    <use
-                                                        href={`${icons}#humidity`}
-                                                    />
-                                                </svg>
-                                                <p className="option-txt">
-                                                    <span className="txt">
-                                                        Humidity
-                                                    </span>
-                                                    <span className="count">
-                                                        {current.humidity}
-                                                    </span>
-                                                    <span className="marker">
-                                                        %
-                                                    </span>
-                                                </p>
-                                            </div>
-                                            <div className="current-weather__option option">
-                                                <svg
-                                                    className="option-icon"
-                                                    width="20"
-                                                    height="20"
-                                                >
-                                                    <use
-                                                        href={`${icons}#pressure`}
-                                                    />
-                                                </svg>
-                                                <p className="option-txt">
-                                                    <span className="txt">
-                                                        Pressure
-                                                    </span>
-                                                    <span className="count">
-                                                        {current.pressure_mb}
-                                                    </span>
-                                                    <span className="marker">
-                                                        hPa
-                                                    </span>
-                                                </p>
-                                            </div>
-                                            <div className="current-weather__option option">
-                                                <svg
-                                                    className="option-icon"
-                                                    width="20"
-                                                    height="20"
-                                                >
-                                                    <use
-                                                        href={`${icons}#wind`}
-                                                    />
-                                                </svg>
-                                                <p className="option-txt">
-                                                    <span className="txt">
-                                                        Wind
-                                                    </span>
-                                                    <span className="count">
-                                                        {current.wind_kph}
-                                                    </span>
-                                                    <span className="marker">
-                                                        kph
-                                                    </span>
-                                                </p>
-                                            </div>
+                                            <CurrentOption
+                                                currentData={current.humidity}
+                                                optionTxt={'Humidity'}
+                                                optionMarker={'%'}
+                                                optionIcon={'humidity'}
+                                            />
+                                            <CurrentOption
+                                                currentData={
+                                                    current.pressure_mb
+                                                }
+                                                optionTxt={'Pressure'}
+                                                optionMarker={'hPa'}
+                                                optionIcon={'pressure'}
+                                            />
+                                            <CurrentOption
+                                                currentData={current.wind_kph}
+                                                optionTxt={'Wind'}
+                                                optionMarker={'kph'}
+                                                optionIcon={'wind'}
+                                            />
                                         </div>
                                     </div>
                                 </div>

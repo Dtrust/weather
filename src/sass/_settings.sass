@@ -6,12 +6,14 @@
 	--body-background-color: linear-gradient(hsla(0, 0%, 100%, 0) 0%, hsla(190, 78%, 56%, 1) 100%)
 	--block-background-color: hsla(200, 100%, 97%, 1)
 	--color: hsla(210, 31%, 24%, 1)
+	--btn-background-color: hsla(227, 58%, 36%, 1)
 
 :root,
 [data-theme="dark"]
 	--body-background-color: linear-gradient(rgba(43, 62, 81, 1) 0%, rgba(17, 26, 28, 1) 100%)
 	--block-background-color: hsla(200, 8%, 7%, 1)
 	--color: hsla(0, 0%, 95%, 1)
+	--btn-background-color: hsla(227, 58%, 36%, 1)
 
 
 .visually-hidden:not(:focus):not(:active),
@@ -113,10 +115,28 @@ textarea:focus:-ms-input-placeholder
 .btn
 	padding: toRem(10) toRem(15)
 	border-radius: toRem(10)
-	background: #273e91
+	background: var(--btn-background-color)
 	transition: all .5s ease-in-out
 	&:hover
-		background: #3d5bc9
+		background: hsla(227, 56%, 31%, 1)
+
+.link
+	position: relative
+	color: var(--btn-background-color)
+	transition: all 265ms ease-in
+	&::after
+		content: ''
+		position: absolute
+		bottom: 0
+		display: block
+		width: 0
+		height: 1px
+		transition: width .3s
+	&:hover
+		color: hsla(227, 58%, 36%, 1)
+		&::after
+			width: 100%
+			background-color: hsla(227, 58%, 36%, 1)
 
 @media screen and (max-width: 420px)
 	.block

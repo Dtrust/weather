@@ -15,6 +15,7 @@
     &::-webkit-scrollbar-track {
         -webkit-box-shadow: 5px 5px 5px -5px hsla(0, 1, 27, 1) inset;
         background-color: #f3f3f3;
+        border-radius: 5px;
     }
     &::-webkit-scrollbar-thumb {
         border-radius: 5px;
