@@ -1,5 +1,6 @@
-@import './src/sass/mixins'
-@import './src/sass/functions'
+@import '../../sass/mixins'
+@import '../../sass/functions'
+@import '../../sass/variables'
 
 .search
 	&-content
@@ -22,3 +23,38 @@
 		height: toRem(17)
 		opacity: .5
 		cursor: pointer
+	&-dropdown
+		&__list
+			position: absolute
+			top: 100%
+			left: 10px
+			right: 10px
+			margin-top: toRem(5)
+			max-height: toRem(600)
+			min-width: toRem(470)
+			overflow-y: auto
+			background: var(--block-background-color)
+			border-radius: toRem(10)
+			box-shadow: $-box-shadow
+			z-index: 2
+		&__item
+			padding: toRem(10) toRem(15)
+			cursor: pointer
+			&:not(:last-of-type)
+				border-bottom: 1px solid var(--color)
+			&:hover
+				background: var(--color)
+				color: var(--block-background-color)
+		&__city
+			font-size: toRem(16)
+			font-weight: 600
+		&__name
+			font-size: toRem(14)
+			font-weight: 400
+			opacity: .8
+
+@media screen and (max-width: 650px)
+	.search
+		&-dropdown
+			&__list
+				min-width: unset

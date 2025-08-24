@@ -4,3 +4,4 @@ export * from './Search';
 export * from './CurrentWeather';
 export * from './Forecast';
 export * from './Footer';
+export * from './LoaderApp';

@@ -14,6 +14,7 @@ export type ForecastItemType = {
 
 export interface IForecast {
     forecastItems: ForecastItemType[];
+    initialForecastItems: ForecastItemType[];
     forecastStatus?: StatusEnum;
     forecast?: {
         forecastday: ForecastItemType[];

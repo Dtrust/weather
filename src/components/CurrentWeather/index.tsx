@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux';
 
 import { useAPPDispatch } from '../../store/store';
 import { fetchCurrentWeather } from '../../store/currentWeather/actions';
-import { fetchUserLocation } from '../../store/user/actions';
-import { selectUserCity, selectUserStatus } from '../../store/user/selectors';
-import { IUser } from '../../store/user/types';
+import {
+    selectUserCity,
+    selectUserInitialCity,
+    selectUserStatus,
+} from '../../store/user/selectors';
 import { StatusEnum } from '../../store/types';
 import { selectCurrentWeather } from '../../store/currentWeather/selectors';
 
@@ -20,18 +22,15 @@ export const CurrentWeather: React.FC = () => {
 
     const { current, currentWeatherStatus } = useSelector(selectCurrentWeather);
 
-    const city: string = useSelector(selectUserCity) || '';
-    const userStatus = useSelector(selectUserStatus) as IUser;
+    const city = useSelector(selectUserCity) || '';
+    const initialCity = useSelector(selectUserInitialCity);
+    const userStatus = useSelector(selectUserStatus);
 
     React.useEffect(() => {
-        dispatch(fetchUserLocation());
-    }, [dispatch]);
-
-    React.useEffect(() => {
-        if (city) {
+        if (city && city !== initialCity) {
             dispatch(fetchCurrentWeather());
         }
-    }, [dispatch, city]);
+    }, [dispatch, city, initialCity]);
 
     return (
         <section className="block current">

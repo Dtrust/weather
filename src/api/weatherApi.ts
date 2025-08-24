@@ -3,14 +3,16 @@ import { IForecast } from '../store/forecastWeather/types';
 import { IUser } from '../store/user/types';
 import { ICurrentWeather } from '../store/currentWeather/types';
 
+const API_BASE = process.env.REACT_APP_API_BASE_URL;
+
 export const currentAPI = async (user: IUser) => {
     return await axios.get<ICurrentWeather>(
-        `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER}&q=${user.city}&aqi=no`
+        `${API_BASE}/current?city=${user.city}`
     );
 };
 
 export const forecastAPI = async (user: IUser) => {
     return await axios.get<IForecast>(
-        `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER}&q=${user.city}&days=${user.forecastDays}&aqi=no`
+        `${API_BASE}/forecast?city=${user.city}&days=${user.forecastDays}`
     );
 };

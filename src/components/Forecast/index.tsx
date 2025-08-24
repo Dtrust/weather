@@ -10,6 +10,7 @@ import { setForecastDays } from '../../store/user/slice';
 import {
     selectUserCity,
     selectUserForecast,
+    selectUserInitialCity,
     selectUserStatus,
 } from '../../store/user/selectors';
 import { fetchForecastWeather } from '../../store/forecastWeather/actions';
@@ -20,25 +21,26 @@ import { SkeletonForecastItem } from '../ForecastItem/SkeletonForecastItem';
 import './Forecast.sass';
 
 const forecastBtns = [
-    { id: 0, text: '3 days', days: '3' },
-    { id: 1, text: '7 days', days: '7' },
-    { id: 2, text: '14 days', days: '14' },
+    { id: 0, text: '2 days', days: '2' },
+    { id: 1, text: '3 days', days: '3' },
+    // { id: 2, text: '14 days', days: '14' },
 ];
 
 export const Forecast: React.FC = () => {
     const dispatch = useAPPDispatch();
 
     const city = useSelector(selectUserCity);
+    const initialCity = useSelector(selectUserInitialCity);
     const userStatus = useSelector(selectUserStatus);
     const forecastDays = useSelector(selectUserForecast) || '';
 
     const { forecastItems, forecastStatus } = useSelector(selectForecast);
 
     React.useEffect(() => {
-        if (city) {
+        if (city && city !== initialCity) {
             dispatch(fetchForecastWeather());
         }
-    }, [dispatch, city]);
+    }, [dispatch, city, initialCity]);
 
     const onChangeForecast = (
         event: React.MouseEvent<HTMLButtonElement>,
