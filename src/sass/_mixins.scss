@@ -1,3 +1,5 @@
+@use 'functions';
+
 @mixin defineColorHSL($color, $hue, $saturation, $lightness) {
     #{$color}: unquote('hsl(#{$hue}, #{$saturation}, #{$lightness})');
     #{$color}-h: #{$hue};
@@ -55,12 +57,12 @@ $maxWidth: 1480;
 }
 
 @mixin title {
-    font-size: toRem(24);
+    font-size: functions.toRem(24);
     font-weight: 700;
 }
 
 @mixin text {
-    font-size: toRem(20);
+    font-size: functions.toRem(20);
     font-weight: 600;
 }
 

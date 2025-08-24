@@ -1,13 +1,13 @@
-@import './src/sass/mixins'
-@import './src/sass/functions'
+@use '../../sass/mixins'
+@use '../../sass/functions'
 
 
 .header
 	&-content
 		&.container
-			@include flexCenter
+			@include mixins.flexCenter
 			justify-content: space-around
-			padding: toRem(20) toRem(15)
+			padding: functions.toRem(20) functions.toRem(15)
 	&-title
-		font-size: toRem(32)
+		font-size: functions.toRem(32)
 		font-weight: 700

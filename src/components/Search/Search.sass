@@ -1,26 +1,26 @@
-@import '../../sass/mixins'
-@import '../../sass/functions'
-@import '../../sass/variables'
+@use '../../sass/mixins'
+@use '../../sass/functions'
+@use '../../sass/variables'
 
 .search
 	&-content
-		@include flexCenter
+		@include mixins.flexCenter
 		justify-content: center
 		position: relative
 		&.container
-			max-width: toRem(340)
+			max-width: functions.toRem(340)
 	&-input
 		width: 100%
-		padding: toRem(10) toRem(35) toRem(10) toRem(10)
-		height: toRem(40)
-		border-radius: toRem(10)
+		padding: functions.toRem(10) functions.toRem(35) functions.toRem(10) functions.toRem(10)
+		height: functions.toRem(40)
+		border-radius: functions.toRem(10)
 	&-icon
 		position: absolute
 		top: 50%
-		right: toRem(25)
+		right: functions.toRem(25)
 		transform: translate(0, -50%)
-		width: toRem(17)
-		height: toRem(17)
+		width: functions.toRem(17)
+		height: functions.toRem(17)
 		opacity: .5
 		cursor: pointer
 	&-dropdown
@@ -29,16 +29,16 @@
 			top: 100%
 			left: 10px
 			right: 10px
-			margin-top: toRem(5)
-			max-height: toRem(600)
-			min-width: toRem(470)
+			margin-top: functions.toRem(5)
+			max-height: functions.toRem(600)
+			min-width: functions.toRem(470)
 			overflow-y: auto
 			background: var(--block-background-color)
-			border-radius: toRem(10)
-			box-shadow: $-box-shadow
+			border-radius: functions.toRem(10)
+			box-shadow: variables.$box-shadow
 			z-index: 2
 		&__item
-			padding: toRem(10) toRem(15)
+			padding: functions.toRem(10) functions.toRem(15)
 			cursor: pointer
 			&:not(:last-of-type)
 				border-bottom: 1px solid var(--color)
@@ -46,10 +46,10 @@
 				background: var(--color)
 				color: var(--block-background-color)
 		&__city
-			font-size: toRem(16)
+			font-size: functions.toRem(16)
 			font-weight: 600
 		&__name
-			font-size: toRem(14)
+			font-size: functions.toRem(14)
 			font-weight: 400
 			opacity: .8
 

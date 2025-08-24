@@ -1,32 +1,32 @@
-@import './src/sass/mixins'
-@import './src/sass/functions'
+@use '../../sass/mixins'
+@use '../../sass/functions'
 
 
 .forecast
 	&-item
-		@include flexCenter
+		@include mixins.flexCenter
 		flex-direction: column
-		min-width: toRem(140)
+		min-width: functions.toRem(140)
 		scroll-snap-align: start
 		&__day,
 		&__date
 			font-weight: 700
 		&__date
-			margin-top: toRem(3)
-			font-size: toRem(14)
+			margin-top: functions.toRem(3)
+			font-size: functions.toRem(14)
 		&__icon
-			max-width: toRem(60)
+			max-width: functions.toRem(60)
 		&__txt
-			margin-bottom: toRem(5)
-			max-width: toRem(160)
+			margin-bottom: functions.toRem(5)
+			max-width: functions.toRem(160)
 			text-align: center
-			font-size: toRem(14)
+			font-size: functions.toRem(14)
 			font-weight: 600
 		&__temp
-			font-size: toRem(14)
+			font-size: functions.toRem(14)
 			font-weight: 700
 			& .separate
 				display: inline-block
-				margin: 0 toRem(3)
+				margin: 0 functions.toRem(3)
 		&--skeleton
-			min-width: toRem(140)
+			min-width: functions.toRem(140)

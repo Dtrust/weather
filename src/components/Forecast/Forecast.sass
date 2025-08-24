@@ -1,25 +1,25 @@
-@import './src/sass/variables'
-@import './src/sass/mixins'
-@import './src/sass/functions'
+@use '../../sass/variables'
+@use '../../sass/mixins'
+@use '../../sass/functions'
 
 
 .forecast
-	margin-bottom: toRem(30)
+	margin-bottom: functions.toRem(30)
 	&-content
-		box-shadow: $-box-shadow
+		box-shadow: variables.$box-shadow
 	&-wrap
-		@include flexCenter
+		@include mixins.flexCenter
 	&-list
 		display: flex
-		column-gap: toRem(20)
-		margin-top: toRem(30)
-		padding-bottom: toRem(15)
+		column-gap: functions.toRem(20)
+		margin-top: functions.toRem(30)
+		padding-bottom: functions.toRem(15)
 		overflow-x: auto
 		scroll-snap-type: x proximity
-		@include scrollBar
+		@include mixins.scrollBar
 	&-btn
 		&:not(:last-of-type)
-			margin-right: toRem(15)
+			margin-right: functions.toRem(15)
 		&.active
 			background: green
 			&:hover

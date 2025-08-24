@@ -1,15 +1,15 @@
-@import './src/sass/mixins'
-@import './src/sass/functions'
+@use '../../sass/mixins'
+@use '../../sass/functions'
 
 
 .switch
-	@include flexCenter
-	width: toRem(60)
-	height: toRem(30)
+	@include mixins.flexCenter
+	width: functions.toRem(60)
+	height: functions.toRem(30)
 	position: relative
 	background-color: #ccc
 	transition: .4s
-	border-radius: toRem(30)
+	border-radius: functions.toRem(30)
 	cursor: pointer
 	&-icon
 		pointer-events: none
@@ -26,8 +26,8 @@
 		top: 50%
 		transform: translate(0, -50%)
 		left: 5px
-		width: toRem(20)
-		height: toRem(20)
+		width: functions.toRem(20)
+		height: functions.toRem(20)
 		border-radius: 50%
 		background: #2b3e51
 		transition: all .5s ease-in-out
